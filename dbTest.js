@@ -1,5 +1,7 @@
 var db = require('./models')
 var async = require('async')
+
+/*
 // Create a category: Category model must exist and be migrated
 
 // db.category.create({
@@ -55,4 +57,17 @@ db.project.create({
   //   })
   // })
   // console.log('redirect or something')
+})
+
+*/
+
+db.category.findOrCreate({
+  where:{name: 'node'}
+})
+.then(([category, created]) => {
+  console.log(`This was created: ${created}`);
+  console.log(category.get());
+})
+.catch(err => {
+  console.log(err);
 })
