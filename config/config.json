@@ -1,16 +1,25 @@
 {
-  "development": {
-    "database": "project_organizer_development",
+  "development": 
+  {
+    "username": "imjchiang",
+    "password": 5375,
+    "database": "project_organizer",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
-  "test": {
-    "database": "project_organizer_test",
+  "test": 
+  {
+    "username": "imjchiang",
+    "password": 5375,
+    "database": "project_organizer",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
-  "production": {
-    "database": "project_organizer_production",
+  "production": 
+  {
+    "username": "imjchiang",
+    "password": 5375,
+    "database": "project_organizer",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
