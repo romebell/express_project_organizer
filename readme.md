@@ -6,6 +6,46 @@ To practice N:M associations, we'll be adding the ability to categorize projects
 
 Keeping track of projects is a necessary part of peoples' personal lives and businesses. Another individual has created a project organizer that allows you to create and view projects, but it'd be nice to categorize projects. Let's add this functionality!
 
+## Before Getting Started
+This project requires `node` version 13. In order to make sure that you are on the right version, do the following: 
+```text
+nvm use 13
+```
+
+If you don't have version 13 of `node` then you need to do the following steps:
+1. Install nvm (Node Version Manager) more on [nvm](https://github.com/nvm-sh/nvm)
+```
+brew install nvm
+```
+2. Make directory 
+```
+mkdir ~/.nvm
+```
+3. Open zshrc and add the following lines
+Open your zshrc (open ~/.zshrc) and add these lines:
+```text
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+```
+4. Close out of your terminal completely (`CMD + q`)
+5. Open terminal back up and run
+```text
+source ~/.zshrc
+```
+6. Install `node` version 13
+```text
+nvm install 13
+```
+7. Switch to version 13
+```text
+nvm use 13
+```
+8. You can switch to 14 by doing the following:
+```text
+nvm use 14
+```
+
 ## Getting Started
 
 We'll be using an existing application that includes one model, a few routes, and a few views.
