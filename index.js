@@ -28,8 +28,10 @@ app.get('*', (req, res) => {
   res.render('main/404')
 })
 
-let server = app.listen(process.env.PORT || 3000, function() {
-  rowdy.print()
-})
+const port = process.env.PORT || 3000;
+function listenForPort() {
+  console.log(`Server is running on port ${port}`);
+}
+const server = app.listen(port, listenForPort);
 
 module.exports = server
