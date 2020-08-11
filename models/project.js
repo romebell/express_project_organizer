@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     githubLink: {
       type: DataTypes.TEXT,
       validate: {
+        //says if its a link then itll enter it in the data
         isUrl: true
       }
     },
