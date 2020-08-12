@@ -1,5 +1,6 @@
 var db = require('./models')
 var async = require('async')
+const category = require('./models/category')
 // Create a category: Category model must exist and be migrated
 
 // db.category.create({
@@ -58,14 +59,47 @@ var async = require('async')
 // })
 
 
-db.category.findOrCreate({
-  where: {name: 'node'}
-})
-.then(([category, created])=> {
-    console.log(`This was created ${created}`)
-    console.log(category.get())
-})
-.catch(err =>{
-  console.log('Error',err)
-})
+// db.category.findOrCreate({
+//   where: {name: 'artist'}
+// })
+// .then(([category, created])=> {
+//     console.log(`This was created ${created}`)
+//     console.log(category.get())
+// })
+// .catch(err =>{
+//   console.log('Error',err)
+// })
+
+// db.project.findOrCreate({
+//   where: {name: 'Levin Batallones'},
+//   defaults: {
+//     githubLink: 'http://github.com/vbatallones/express_project_organizer',
+//     deployLink: 'http://github.com/vbatallones/express_project_organizer',
+//     description: 'This is a project where we use express to organize'
+//   }
+// })
+// .then(([project, created]) => {
+//   console.log(created)
+
+//   db.category.findOrCreate({
+//     where: {name: 'Engineer'}
+//   })
+//     .then(([category, created]) => {
+//       console.log(created);
+//       project.addCategory(category)
+//       .then(newRelationship => {
+//         console.log('New Relationship')
+//         console.log(newRelationship)
+//       })
+//       .catch(err => {
+//         console.log('Error', err)
+//       }) 
+//     })
+//     .catch(err => {
+//       console.log('Error', err)
+//     })
+// })
+// .catch(err => {
+//   console.log('Error', err)
+// })
 
