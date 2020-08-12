@@ -1,8 +1,6 @@
 
-<% projects.forEach(function(project) { %>
-    <div class="well">
-      <h2>
-        <a href="/projects/<%= project.id %>"><%= project.name %></a>
-      </h2>
-    </div>
-  <% }); %>
+
+<%= cat.name %>
+<% for(let i = 0 ;i < proj.length; i++) { %>
+<h2> <%= (proj[i].dataValues.name) %> </h2>
+<% } %>

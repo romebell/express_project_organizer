@@ -12,18 +12,41 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
-    db.category.findByPk(req.params.id, {
-        include: {
-            model: db.project
-        }
-    })
-    .then( () => {
-        res.render('categories/details')
 
+router.get('/:id', (req, res) => {
+    db.category.findByPk(req.params.id)
+    .then(cat => {
+        cat.getProjects()
+        .then(hamburgers => {
+            res.render('categories/show', { proj: hamburgers, cat: cat })
+        })
     })
-    
 })
+
+
+// router.get('/:id', (req, res) => {
+//     db.category.findByPk(req.params.id)
+//         // include: {
+//         //     model: db.project       
+//         // }
+//         .then(cat => {
+//             cat.getProjects()
+//             .then(proj => {
+
+//                 res.render('categories/details', {cat: cat, proj: proj})
+//             })
+//             .catch(err => {
+//                 console.log('Error: ', err)
+//             })
+//         })
+//         .catch(err => {
+//             console.log('Error: ', err)
+//         })
+
+        
+//     })
+    
+
 
 
 
