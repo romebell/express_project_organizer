@@ -13,5 +13,7 @@
 <p><%= project.description %></p>
 
 <hr />
-
+<form action="/projects/<%= project.id %>?_method=DELETE" method="POST">
+  <button type="submit">Delete Project</button>
+</form>
 <a href="/">&larr; Back Home</a>

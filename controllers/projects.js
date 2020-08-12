@@ -17,12 +17,16 @@ router.post('/', (req, res) => {
     .then(([category, created]) => {
       console.log('New category:', created)
       project.addCategory(category)
-      
+      .then(()=>{
+        res.redirect('/')
+      })
+      .catch((error) => {
+        console.log('Error:', error)
+      })
     })
     .catch((error) => {
       console.log('Error:', error)
     })
-    res.redirect('/')
   })
   .catch((error) => {
     res.status(400).render('main/404')
@@ -42,6 +46,26 @@ router.get('/:id', (req, res) => {
   .then((project) => {
     if (!project) throw Error()
     res.render('projects/show', { project: project })
+  })
+  .catch((error) => {
+    res.status(400).render('main/404')
+  })
+})
+
+router.delete('/:id', (req, res) => {
+  db.categoriesProjects.destroy({
+    where: { projectId: req.params.id }
+  })
+  .then( () => {
+    db.project.destroy({
+      where: { id: req.params.id }
+    })
+    .then(destroyedProject => {
+      res.redirect('/')
+    })
+    .catch((error) => {
+      res.status(400).render('main/404')
+    })
   })
   .catch((error) => {
     res.status(400).render('main/404')
