@@ -45,6 +45,22 @@ router.get('/:id', (req, res) => {
   })
 })
 
+router.put("/:id", async(req, res) => {
+  try {
+    await db.project.update({
+        name: req.body.name,
+        githubLink: req.body.githubLink,
+        deployLink: req.body.deployLink,
+        descript: req.body.description
+    }, {
+      where: { id: req.params.id }
+    });
+    res.redirect("/projects/:id");
+  } catch (error) {
+    console.log(error, 'error')
+  }
+})
+
 router.delete("/:id", async (req, res) => {
   try {
     await db.project.destroy({
