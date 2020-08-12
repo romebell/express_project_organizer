@@ -1,0 +1,16 @@
+<h1>Categories</h1>
+
+<% if (categories.length < 1) { %>
+    <h4>No Category!</h4>
+  <% } %>
+  
+  <% categories.forEach(function(category) { %>
+    <div class="well">
+      <h5>
+        <a href="/categories/<%= category.id %>"><%= category.name %></a>
+      </h5>
+    </div>
+  <% }); %>
+
+  <a href="/">&larr; Back Home</a>
+  

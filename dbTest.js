@@ -57,14 +57,47 @@ var async = require('async')
 //   // console.log('redirect or something')
 // })
 
-db.category.findOrCreate({
-  where: { name: 'node'}
+// db.category.findOrCreate({
+//   where: { name: 'node'}
+// })
+// .then(([category, created])=>{
+//   console.log(`This was created ${created}`)
+//   console.log(category.get())
+// })
+// .catch(err=>{
+//   console.log('error', err)
+// })
+
+db.project.findOrCreate({
+  where: { name: 'Project Organizer'},
+  defaults: { 
+    githubLink: 'https://github.com/ireneyap/express_project_organizer',
+    deployLink: 'https://github.com/ireneyap/express_project_organizer',
+    description: 'This is a project where we use express to organize '
+}
 })
-.then(([category, created])=>{
-  console.log(`This was created ${created}`)
-  console.log(category.get())
+.then(([project, created])=>{
+  console.log(created)
+
+  db.category.findOrCreate({
+    where: { name: 'node'}
+  })
+  .then(([category, created])=>{
+    console.log(created);
+    project.addCategory(category)
+    .then(newRelationship =>{
+      console.log('New Relationship');
+      console.log(newRelationship);
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+
 })
 .catch(err=>{
-  console.log('error', err)
+  console.log(err)
 })
-
