@@ -12,16 +12,50 @@ var async = require('async')
 // Requires categoriesProjects to exist, be migrated, and properly associated
 
 //this is part1
-db.category.findOrCreate({
-  where: {name: "node"}
+// db.category.findOrCreate({
+//   where: {name: "node"}
+// })
+// .then(([category, created]) => {
+//   console.log(`This was created: ${created}`)
+//   console.log(category.get());
+// })
+// .catch(err=>{
+//   console.log("error", err);
+// })
+
+db.project.findOrCreate({
+  where: {name: "Project Organizer"},
+  defaults: { 
+    githubLink: "https://github.com/crnguyen/express_project_organizer",
+    deployLink: "https://github.com/crnguyen/express_project_organizer",
+    description: "Project organizer"
+  }
 })
-.then(([category, created]) => {
-  console.log(`This was created: ${created}`)
-  console.log(category.get());
+.then(([project,created])=>{ //take project to see if its created
+  console.log(created);
+  db.category.findOrCreate({
+    where: { name: "node"}
+  })
+  .then(([category,created])=>{
+    console.log(created);
+    project.addCategory(category)
+    .then(newRelationship => {
+      console.log("new relationship");
+      console.log(newRelationship);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+ })
+ .catch(err => {
+   console.log(err);
+ })
 })
-.catch(err=>{
-  console.log("error", err);
-})
+.catch(err => {
+console.log('Error', err);
+});
+
+//part 2- create a join model
 
 // var cats = ['node', 'javascript', 'react', 'css', 'html']
 
