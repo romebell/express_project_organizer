@@ -2,19 +2,6 @@ let express = require('express')
 let db = require('../models')
 let router = express.Router()
 
-// router.get("/", (req, res) =>
-// {
-//   db.project.findAll()
-//   .then((projects) =>
-//   {
-//     res.render("main/index", {projects: projects});
-//   })
-//   .catch(err =>
-//   {
-//     res.send(err);
-//   });
-// });
-
 // POST /projects - create a new project
 router.post('/', (req, res) => {
   db.project.create({
