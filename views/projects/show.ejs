@@ -1,4 +1,11 @@
-<h1><%= project.name %></h1>
+<h1><%= project.name %> - <%= project.categories[0].dataValues.category %></h1>
+
+<a href="/projects/edit/<%= project.id %>"><button>Edit Project</button></a>
+
+<form method="POST" action="/projects/<%= project.id %>?_method=DELETE">
+  <input type="hidden" name="id" value="<%= project.id %>">
+  <button type="submit">Delete Project</button>
+</form>
 
 <a class="btn btn-primary" href="<%= project.githubLink %>" target="_blank">
   <i class="fa fa-github" aria-hidden="true"></i>

@@ -1,0 +1,13 @@
+<h1>Category - <%= category.category %></h1>
+
+<% category.projects.forEach(project => { %>
+    <div class="well">
+        <h2>
+            <a href="/projects/<%= project.id %>"><%= project.name %></a>
+        </h2>
+    </div>
+<% }); %>
+
+<hr />
+
+<a href="/">&larr; Back Home</a>
