@@ -10,8 +10,14 @@
   Deployed Link
 </a>
 
+
 <p><%= project.description %></p>
 
 <hr />
 
+<form method="POST" action="/projects">
+  <label for="category"> Add a category you goof </label>
+  <input id="category" type="text" name="category">
+  <input type="submit">
+</form>
 <a href="/">&larr; Back Home</a>

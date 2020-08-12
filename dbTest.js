@@ -69,6 +69,10 @@ var async = require('async')
 //   console.log(`error: ${err}`)
 // })
 
+db.category.findOrCreate({
+  where: {}
+})
+
 db.project.findOrCreate({
   where: { name: 'Project Organizer' },
   defaults: { 
