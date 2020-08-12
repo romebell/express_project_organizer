@@ -1,22 +1,22 @@
-
+console.log('catagories connected')
 
 let express = require("express");
 let db = require("../models");
 let router = express.Router();
 
 // POST /projects - create a new project
-router.post("/", (req, res) => {
-  db.catagory.findOrCreate({
-      where: { name: req.body.name },
+router.get("/:id", (req, res) => {
+  db.catagories.findOrCreate({
+     where: {id: req.params.id }
     })
     .then(([category, created]) => {
       console.log("category created", created);
-      project.addCategory(category);
+    
     })
     .catch((err) => {
-      console.log(err);
+      console.log('error in catagories.js',err);
     });
-    res.render("catagories/show")
+    res.render("/catagories/show")
 });
 
 
