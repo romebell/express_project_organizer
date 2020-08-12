@@ -11,7 +11,20 @@ router.post('/', (req, res) => {
     description: req.body.description
   })
   .then((project) => {
-    res.redirect('/')
+    db.category.findOrCreate({
+      where: { name: req.body.category}
+    })
+    .then(([category, created])=>{
+      //add category and redirect to home after that
+      project.addCategory(category)
+      console.log('Category created:',created)
+      res.redirect('/')
+    
+    })
+    .catch(err =>{
+      console.log('error', err)
+    })
+    
   })
   .catch((error) => {
     res.status(400).render('main/404')
