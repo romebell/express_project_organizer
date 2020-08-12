@@ -51,4 +51,27 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.delete("/:id", function(req, res)
+{
+  db.categories_projects.destroy(
+  {
+    where: { projectId: req.params.id }
+  })
+  .then(function()
+  {
+    db.project.destroy(
+    {
+      where: { id: req.params.id }
+    })
+    .then(destroyedProject =>
+    {
+      res.redirect("/");
+    })
+    .catch(err =>
+    {
+      res.status(400).render("main/404");
+    });
+  });
+})
+
 module.exports = router

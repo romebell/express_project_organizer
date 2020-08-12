@@ -1,16 +1,8 @@
-<% if (category !== undefined || category !== null)
-{
-    category.forEach(categ =>
-    { %> 
-        <h1><%= categ.name %></h1>
-        <% categ.projects.forEach(project => { %>
-            <ul>
-                <li><a href="/projects/<%= project.id %>" ><%= project.name %></a></li>
-            </ul>
-        <% }) %>
-    <% }) %> 
-} %> 
+<h1>Projects using category <%= category.name %></h1>
 
-<hr>
-
-<a href="/">&larr; Back Home</a>
+<% category.projects.forEach(p =>
+{ %>
+    <ul>
+        <li><a href="/projects/<%= p.id %>"><%= p.name %></a></li>
+    </ul>
+<% }) %>

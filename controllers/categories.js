@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     })
     .then(categories => 
     {
-        res.render('categories/show', {category: categories});
+        res.render('categories/index', {category: categories});
     })
     .catch(err => 
     {
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) =>
     .then(category => 
     {
         console.log(category.projects);
-        res.render('categories/show', {category: category });
+        res.render('categories/show', { category });
     })
     .catch(error => {
         console.log('Error', error)
