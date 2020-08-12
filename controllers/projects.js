@@ -11,6 +11,14 @@ router.post('/', (req, res) => {
     description: req.body.description
   })
   .then((project) => {
+    db.category.findOrCreate({
+      where: { name: req.body.category }
+    }).then (([category,created]) => {
+      console.log(`New Category: created`)
+      project.addCategory(category)
+    }).catch(err => {
+      console.log(err, 'error')
+    })
     res.redirect('/')
   })
   .catch((error) => {
@@ -36,5 +44,7 @@ router.get('/:id', (req, res) => {
     res.status(400).render('main/404')
   })
 })
+
+
 
 module.exports = router
