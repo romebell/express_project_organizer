@@ -32,8 +32,6 @@ router.post('/', (req, res) => {
   .catch((error) => {
     res.status(400).render('main/404')
   })
-
-  
 })
 
 // GET /projects/new - display form for creating a new project
