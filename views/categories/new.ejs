@@ -1,0 +1,20 @@
+<h1>Create a new Category</h1>
+
+<form action="/categories" method="POST">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" required>
+  </div>
+
+  <input type="submit" class="btn btn-primary">
+</form>
+</br>
+<div>
+
+  <h1>List of Categories:</h1>
+  <ul>
+      <% categories.forEach(category => { %> 
+          <a href="/categories/<%= category.id %>" ><li><h2><%= category.name %> </h2></li></a>
+      <% }) %>
+  </ul>
+</div>
