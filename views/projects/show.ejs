@@ -12,6 +12,11 @@
 
 <p><%= project.description %></p>
 
+<form method="POST" action="/projects/<%= project.id %>?_method=DELETE">
+  <input type="hidden" name="<%= project.id %>">
+  <a href="/projects/<%= project.id %>">DELETE PROJECT</a>
+</form>
+
 <hr />
 
 <a href="/">&larr; Back Home</a>
