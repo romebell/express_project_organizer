@@ -20,6 +20,37 @@ router.post('/', (req, res) => {
 
 // GET /projects/new - display form for creating a new project
 router.get('/new', (req, res) => {
+  db.project.findOrCreate({
+    where: { name: 'Project Organizer' },
+    default: { 
+      githubLink: 'https://github.com/thleigh/express_project_organizer',
+      deployLink: 'https://github.com/thleigh/express_project_organizer',
+      decription: 'This is a project where we use express to organize.'
+    }
+  })
+  .then(([project, created]) => {
+     console.log(created);
+     db.category.findOrCreate({
+       where: { name: 'node' }
+     })
+     .then(([category, created]) => {
+        console.log(created);
+        project.addCategory(category)
+        .then(newRelationship => {
+          console.log('New Relationship');
+          console.log(newRelationship);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+     })
+     .catch(err => {
+       console.log(err);
+     })
+  })
+  .catch(err => {
+    console.log('Error', err);
+  });
   res.render('projects/new')
 })
 
