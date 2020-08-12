@@ -1,0 +1,12 @@
+<h1>Project Organizer</h1>
+
+<h2>Projects associated with: <%= category.name %> </h2>
+<hr>
+
+<% category.projects.forEach(project => { %>
+  <div class="well">
+    <h2>
+      <%= project.name %>
+    </h2>
+  </div>
+<% }); %>
