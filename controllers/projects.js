@@ -37,43 +37,44 @@ router.get('/:id', (req, res) => {
   })
 })
 
-router.post('/projects', (req, res) => {
-  db.project.create({
-    name: req.body.name,
-    githubLink: req.body.githubLink,
-    deployLink: req.body.deployedLink,
-    description: req.body.description
-  })
-  .then((project) => {
-    res.redirect('/')
-  })
-  .catch((error) => {
-    res.status(400).render('main/404')
-  })
-})
+// router.post('/projects', (req, res) => {
+//   db.project.create({
+//     name: req.body.name,
+//     githubLink: req.body.githubLink,
+//     deployLink: req.body.deployedLink,
+//     description: req.body.description
+//   })
+//   .then((project) => {
+//     res.redirect('/')
+//   })
+//   .catch((error) => {
+//     res.status(400).render('main/404')
+//   })
+// })
 
 //GET / category
-router.get('/categories', (req, res) => {
-    db.category.findAll({
-    })
-    .then((categories) => {
-      if (!categories) throw Error()
-      res.render('projects/categories', {categories: categories});
-    })
-    .catch(err => {
-      console.log('Error', err)
-    })
-})
+// router.get('/categories', (req, res) => {
+//   db.category.findAll({})
+//   .then((response) => {
+//     if (!categories) throw Error()
+//     res.render('projects/categories', {categories: response});
+//   })
+//   .catch(err => {
+//     console.log('Error', err)
+//   })
+// })
+// router.get('/categories/:id', (req, res) => {
+//   db.category.findOne({  
+//     where: { id: req.params.id}
+//   })
+//   .then((category) => {
+//     console.log(category)
+//     if (!category) throw Error()
+//   })
+//   .catch((error) => {
+//     res.status(400).render('main/404')
+//   })
 
-router.get('/categories/:id', (req, res) => {
-  db.category.findOne({
-    where: {id: req.params.id}
-  })
-  .then((category) => {
-    if(!category) throw Error()
-  })
-  .catch(err => {
-    console.log('err', err)
-  })
-})
+// })
+
 module.exports = router

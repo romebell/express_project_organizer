@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.category.belongsToMany(models.project,
-     {through: 'categories_project', onDelete:'CASCADE'})
+     {through: 'categories_projects', onDelete:'CASCADE'})
     }
   };
   category.init({
