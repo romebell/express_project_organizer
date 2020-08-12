@@ -10,7 +10,7 @@ router.get('/', (req, res) =>{
     db.category.findAll()
     .then((category) => {
         if (!category) throw Error()
-        res.render('categories/index', { category: category })
+        res.render('categories/index', { categories: category })
     })
 })
 

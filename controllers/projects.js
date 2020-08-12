@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     console.log('line 32', created);
     db.category.findOrCreate({
       where : {
-        name: req.body.category 
+        category: req.body.category 
       }
     })
     .then(([category, created])=>{
