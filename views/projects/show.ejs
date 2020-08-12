@@ -16,4 +16,8 @@
 
 <hr />
 
+<form action="/projects/<%=project.id%>?_method=DELETE" method="POST">
+  <input hidden type="text" name="" value="<%=project.id%>">
+  <button type="submit">DELETE PROJECT</button>
+</form>
 <a href="/">&larr; Back Home</a>

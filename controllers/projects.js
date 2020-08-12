@@ -1,6 +1,8 @@
 let express = require('express')
 let db = require('../models')
+// const { where } = require('sequelize/types')
 let router = express.Router()
+
 
 // POST /projects - create a new project
 router.post('/', (req, res) => {
@@ -18,8 +20,8 @@ router.post('/', (req, res) => {
       console.log('new category')
       console.log(created)
       project.addCategory(category)
-      res.redirect('/')
-    })
+        res.redirect('/')
+      })
   })
   .catch((error) => {
     res.status(400).render('main/404')
@@ -50,5 +52,18 @@ router.get('/:id', (req, res) => {
   })
 })
 
+router.delete('/:id', (req, res) => {
+  db.categories_projects.destroy ({
+    where: {projectId: req.params.id}
+  })
+  .then(() => {
+    db.project.destroy({ 
+    where: {id: req.params.id}
+    })
+    .then(destroyedProject => {
+      res.redirect('/')
+    })
+  })
+})
 
 module.exports = router
