@@ -11,7 +11,23 @@ router.post('/', (req, res) => {
     description: req.body.description
   })
   .then((project) => {
-    res.redirect('/')
+    db.category.findOrCreate({
+      where: { name: req.body.category}
+    })
+    .then(([category,created])=> {
+      project.addCategory(category)
+      .then(newRelationship => {
+        // console.log(`New Relationship: ${newRelationship}`);
+        res.redirect('/')
+      })
+      .catch((error) => {
+        res.status(400).render('main/404')
+      })
+    })
+    .catch((error) => {
+      res.status(400).render('main/404')
+    })
+    
   })
   .catch((error) => {
     res.status(400).render('main/404')

@@ -11,6 +11,7 @@ app.use(require('morgan')('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(ejsLayouts)
 
+
 app.get('/', (req, res) => {
   db.project.findAll()
   .then((projects) => {
@@ -23,13 +24,26 @@ app.get('/', (req, res) => {
 })
 
 app.use('/projects', require('./controllers/projects'))
+app.use('/categories', require('./controllers/categories'))
+
+
+
+
+
+
+
+
+
+
 
 app.get('*', (req, res) => {
   res.render('main/404')
 })
 
-let server = app.listen(process.env.PORT || 3000, function() {
-  rowdy.print()
-})
+const port = process.env.PORT || 3000;
+function listenForPort() {
+  console.log(`Server is running on port ${port}`);
+}
+const server = app.listen(port, listenForPort);
 
 module.exports = server
