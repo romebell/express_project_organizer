@@ -87,11 +87,11 @@ const db = require('./models')
 //   })
 
 db.project.findOrCreate({
-  where: { name: 'Project Organizer' },
-  default: { 
-  githubLink: 'https://github.com/romebell/express_project_organizer',
-  deployLink: 'https://github.com/romebell/express_project_organizer',
-  description: 'This is a project where we use express to organize'
+  where: { 
+    name: 'Project Organizer', 
+    githubLink: 'https://github.com/romebell/express_project_organizer',
+    deployLink: 'https://github.com/romebell/express_project_organizer',
+    description: 'This is a project where we use express to organize'
 }
 })
 .then(([project, created])=>{
