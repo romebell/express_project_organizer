@@ -11,7 +11,15 @@ router.post('/', (req, res) => {
     description: req.body.description
   })
   .then((project) => {
-    res.redirect('/')
+    db.category.findOrCreate({
+      where: {name: req.body.category}
+    })
+    .then(([category, created]) => {
+      console.log('new category')
+      console.log(created)
+      project.addCategory(category)
+      res.redirect('/')
+    })
   })
   .catch((error) => {
     res.status(400).render('main/404')
@@ -20,52 +28,27 @@ router.post('/', (req, res) => {
 
 // GET /projects/new - display form for creating a new project
 router.get('/new', (req, res) => {
-  db.project.findOrCreate({
-    where: { name: 'Project Organizer' },
-    default: { 
-      githubLink: 'https://github.com/thleigh/express_project_organizer',
-      deployLink: 'https://github.com/thleigh/express_project_organizer',
-      decription: 'This is a project where we use express to organize.'
-    }
-  })
-  .then(([project, created]) => {
-     console.log(created);
-     db.category.findOrCreate({
-       where: { name: 'node' }
-     })
-     .then(([category, created]) => {
-        console.log(created);
-        project.addCategory(category)
-        .then(newRelationship => {
-          console.log('New Relationship');
-          console.log(newRelationship);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-     })
-     .catch(err => {
-       console.log(err);
-     })
-  })
-  .catch(err => {
-    console.log('Error', err);
-  });
   res.render('projects/new')
 })
 
-// GET /projects/:id - display a specific project
+
 router.get('/:id', (req, res) => {
   db.project.findOne({
     where: { id: req.params.id }
   })
   .then((project) => {
-    if (!project) throw Error()
-    res.render('projects/show', { project: project })
+    if (!project) throw Error() 
+    db.category.findByPk(req.params.id, {
+      include: {model: db.project}
+    })
+    .then((category) => {
+      res.render('projects/show', { project: project, category: category })
+    })
   })
   .catch((error) => {
     res.status(400).render('main/404')
   })
 })
+
 
 module.exports = router
