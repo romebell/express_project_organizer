@@ -13,15 +13,16 @@ router.post('/', (req, res) => {
     db.category.findOrCreate({
       where: {category: req.body.category}
     }).then(([category, created]) => {
-      project.addCategory(category);
       console.log(`was it created? ${created}`);
-      res.redirect('/');
-    }).catch(error => {
-      console.log(error);
+      project.addCategory(category)
+        .then(() => {
+          res.redirect('/');
+        });
     });
   }).catch((error) => {
-    res.render('main/404');
+    res.status(404).render('main/404');
   });
+  res.redirect("/");
 });
 
 // GET /projects/new - display form for creating a new project

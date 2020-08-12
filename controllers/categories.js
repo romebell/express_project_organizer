@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
   db.category.findAll()
     .then(categories => {
       console.log(categories)
-      res.render('main/categories', { categories: categories })
+      res.render('categories/index', { categories: categories })
     }).catch(error => {
       console.log(error)
       res.render('main/404')
