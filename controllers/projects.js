@@ -18,15 +18,21 @@ router.post("/", (req, res) => {
         })
         .then(([category, created]) => {
           console.log(`New category: ${created}`);
-          project.addCategory(category);
-          res.redirect("/");
+          project
+            .addCategory(category)
+            .then(() => {
+              res.redirect("/");
+            })
+            .catch(error => {
+              res.status(400).render("main/404");
+            });
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(error => {
+          res.status(400).render("main/404");
         });
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(error => {
+      res.status(400).render("main/404");
     });
 });
 

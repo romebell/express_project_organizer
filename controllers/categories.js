@@ -22,7 +22,6 @@ router.get("/:id", (req, res) => {
       include: [db.project],
     })
     .then((category) => {
-      console.log(category.projects);
       res.render("categories/show", { category: category });
     })
     .catch((error) => {
