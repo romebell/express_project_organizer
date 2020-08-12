@@ -10,5 +10,13 @@ router.get('/', (req, res) => {
 })
 
 
-// app.get('/:id')
+router.get('/:id', (req, res) => {
+    db.category.findByPk(req.params.id)
+    .then(category => {
+        category.getProjects()
+        .then(projects => {
+            res.render('categories/show', { projects: projects, category: category})
+        })
+    })
+})
 module.exports = router

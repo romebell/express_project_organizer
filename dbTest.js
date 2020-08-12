@@ -69,47 +69,47 @@ var async = require('async')
 //   console.log(`error: ${err}`)
 // })
 
-db.category.findOrCreate({
-  where: {}
-})
+// db.category.findOrCreate({
+//   where: {}
+// })
 
-db.project.findOrCreate({
-  where: { name: 'Project Organizer' },
-  defaults: { 
-    githubLink: 'https://github.com/blangwell/express_project_organizer',
-    deployLink: 'https://github.com/blangwell/express_project_organizer',
-    description: 'This is a project where we use express to organize'
-  }
-})
-// take the project that was found or created
-.then(([project, created]) => {
-  console.log(created)
-  //once we've accessed the project table
-  // access the category table
-  db.category.findOrCreate({
-    where: { name: 'node' }
-  })
-  .then(([category, created]) => {
-    console.log(created);
-    // now we make a new category
-    // with sequelize generated addCategory method
-    project.addCategory(category)
-    // have a new relationship between project and category
-    .then(newRelationship => {
-      console.log('new relationship: ')
-      // separated logs because newRelationship is an object
-      console.log(newRelationship)
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  })
-  .catch(err => {
-    console.log(err);
-  })
-})
-.catch(err => {
-  console.log(err);
-})
+// db.project.findOrCreate({
+//   where: { name: 'Project Organizer' },
+//   defaults: { 
+//     githubLink: 'https://github.com/blangwell/express_project_organizer',
+//     deployLink: 'https://github.com/blangwell/express_project_organizer',
+//     description: 'This is a project where we use express to organize'
+//   }
+// })
+// // take the project that was found or created
+// .then(([project, created]) => {
+//   console.log(created)
+//   //once we've accessed the project table
+//   // access the category table
+//   db.category.findOrCreate({
+//     where: { name: 'node' }
+//   })
+//   .then(([category, created]) => {
+//     console.log(created);
+//     // now we make a new category
+//     // with sequelize generated addCategory method
+//     project.addCategory(category)
+//     // have a new relationship between project and category
+//     .then(newRelationship => {
+//       console.log('new relationship: ')
+//       // separated logs because newRelationship is an object
+//       console.log(newRelationship)
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     })
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
+// })
+// .catch(err => {
+//   console.log(err);
+// })
 
 // each .then needs a .catch
