@@ -10,12 +10,30 @@ router.post('/', (req, res) => {
     deployLink: req.body.deployedLink,
     description: req.body.description
   })
-  .then((project) => {
+  .then(([project, created]) => {
+    console.log(created);
+    // category
+    db.category.findOrCreate({
+      where: {name: req.body.category}
+    })
+    .then(([category, created]) => {
+      console.log(created);
+      project.addCategory(category)
+      .then(newRelationship => {
+        console.log('New Relationship');
+        console.log(newRelationship);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    })
     res.redirect('/')
   })
   .catch((error) => {
     res.status(400).render('main/404')
   })
+
+  
 })
 
 // GET /projects/new - display form for creating a new project
