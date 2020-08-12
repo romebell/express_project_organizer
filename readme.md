@@ -102,7 +102,7 @@ db.category.create({
 
 In order to associate a category to many projects, and a project to many categories, we'll need to create an intermediate model. It's recommended that you name this model `categoriesProjects`. It will store two attributes: the id of a category (an integer) and the id of a project (an integer).
 
-Once created, add the associations need to create a many-to-many association between categories and projects, using the join table you just created. Be sure to test this functionality by creating categories and projects, then seeing if you can include them in different queries.
+Once created, add the associations needed to create a many-to-many association between categories and projects, using the join table you just created. Be sure to test this functionality by creating categories and projects, then seeing if you can include them in different queries.
 
 ```js
 var db = require('./models')
@@ -130,7 +130,7 @@ Now that the models have been created, you'll want to add the ability to create 
 * Add a field to the existing view associated with `GET /projects/new`. This new field should accept a new category name. 
   * Keep in mind that categories should be associated with projects
   * Category names should be unique; the category model should have no duplicates (hint, use `findOrCreate`)
-* Add to the view associated withe the `POST /projects` route, which allows the user to add categories to each individual project. 
+* Add to the view associated with the `POST /projects` route, which allows the user to add categories to each individual project. 
 * Create the following routes for viewing categories and viewing projects by category:
   * `GET /categories` - show all the categories that exist
   * `GET /categories/:id` - show a specific category and all the projects with that category
