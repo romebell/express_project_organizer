@@ -11,7 +11,14 @@ router.post('/', (req, res) => {
     description: req.body.description
   })
   .then((project) => {
-    res.redirect('/')
+    db.category.findOrCreate({
+      where : { category: req.body.category}
+    })
+    .then(([category, created])=>{
+      project.addCategory(category)
+      console.log(`category is added ${created}`)
+      res.redirect('/')
+    }) 
   })
   .catch((error) => {
     res.status(400).render('main/404')
@@ -20,8 +27,9 @@ router.post('/', (req, res) => {
 
 // GET /projects/new - display form for creating a new project
 router.get('/new', (req, res) => {
-  res.render('projects/new')
-})
+    res.render('projects/new')
+  })
+  
 
 // GET /projects/:id - display a specific project
 router.get('/:id', (req, res) => {
@@ -29,8 +37,8 @@ router.get('/:id', (req, res) => {
     where: { id: req.params.id }
   })
   .then((project) => {
-    if (!project) throw Error()
-    res.render('projects/show', { project: project })
+      if (!project) throw Error()
+      res.render('projects/show', { project: project })
   })
   .catch((error) => {
     res.status(400).render('main/404')
