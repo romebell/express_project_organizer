@@ -45,6 +45,19 @@ router.get('/:id', (req, res) => {
   })
 })
 
+router.delete("/:id", async (req, res) => {
+  try {
+    await db.project.destroy({
+      where: {
+        id: req.body.id,
+      }
+    });
+    res.redirect("/");
+  } catch (error) {
+    console.log("error");
+  }
+});
+
 
 
 module.exports = router
