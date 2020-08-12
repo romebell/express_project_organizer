@@ -1,7 +1,13 @@
-<h1><%= category.name %></h1>
+<% category.forEach(categ =>
+{ %> 
+    <h1><%= categ.name %></h1>
+    <% categ.projects.forEach(project => { %>
+        <ul>
+            <li><a href="/projects/<%= project.id %>" ><%= project.name %></a></li>
+        </ul>
+    <% }) %>
+<% }) %> 
 
-<% category.projects.forEach(project => { %>
-   <a href="/projects/<%= project.id %>" ><%= project.name %></a>
-<% }) %>
+<hr>
 
 <a href="/">&larr; Back Home</a>
