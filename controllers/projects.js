@@ -4,12 +4,14 @@ let router = express.Router()
 
 // POST /projects - create a new project
 router.post('/', (req, res) => {
-  db.project.create({
+  db.project.findOrCreate({
+    where: { category: req.body.category },
+    default: {
     name: req.body.name,
     githubLink: req.body.githubLink,
     deployLink: req.body.deployedLink,
     description: req.body.description
-  })
+  }
   .then((project) => {
     res.redirect('/')
   })
@@ -17,6 +19,9 @@ router.post('/', (req, res) => {
     res.status(400).render('main/404')
   })
 })
+
+
+
 
 // GET /projects/new - display form for creating a new project
 router.get('/new', (req, res) => {

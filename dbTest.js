@@ -65,3 +65,71 @@ db.category.create({
 }).catch(err => {
   console.log(`error ${err}`);
 })
+
+db.project.findOrCreate({
+  where: { name: 'Project Organizer' },
+  default: {
+    githubLink: 'https://github.com/mgustavob',
+    deployLink: 'https://github.com/mgustavob',
+    description: 'This is my project we use express and sequelize'
+}
+})
+.then(([project, created])=> {
+  console.log(created);
+
+  db.category.findOrCreate({
+    where: { name: 'node' }
+  })
+  .then(([category, created])=>{
+    console.log(created);
+    project.addCategory(category)
+    .then(newRelationship => {
+      console.log(`newRelationship`);
+      console.log(newRelationship);
+
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
+.catch(err => {
+  console.log(err);
+})
+
+
+
+// db.project.findOrCreate({
+//   where: { name: 'Project Organizer' },
+//   default: {
+//     githubLink: 'https://github.com/romebell/express_project_organizer',
+//     deployLink: 'https://github.com/romebell/express_project_organizer',
+//     decription: 'This is a project where we use express to organize.'
+//   }
+// })
+// .then(([project, created]) => {
+//    console.log(created);
+//    db.category.findOrCreate({
+//      where: { name: 'node' }
+//    })
+//    .then(([category, created]) => {
+//       console.log(created);
+//       project.addCategory(category)
+//       .then(newRelationship => {
+//         console.log('New Relationship');
+//         console.log(newRelationship);
+//       })
+//       .catch(err => {
+//         console.log(err);
+//       });
+//    })
+//    .catch(err => {
+//      console.log(err);
+//    })
+// })
+// .catch(err => {
+//   console.log('Error', err);
+// });
