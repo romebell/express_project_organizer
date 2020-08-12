@@ -24,12 +24,12 @@ var async = require('async')
 // })
 
 db.project.findOrCreate({
-  where: {name: "Project Organizer"},
-  defaults: { 
+  where: {
+    name: "Project Organizer",
     githubLink: "https://github.com/crnguyen/express_project_organizer",
     deployLink: "https://github.com/crnguyen/express_project_organizer",
-    description: "Project organizer"
-  }
+    description: "Project organizer using express"
+  },
 })
 .then(([project,created])=>{ //take project to see if its created
   console.log(created);
