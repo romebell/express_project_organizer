@@ -3,36 +3,37 @@ let db = require('../models')
 let router = express.Router()
 
 // POST /projects - create a new project
-router.post('/', async (req, res) => {
-  await db.project.create({
+router.post('/', (req, res) => {
+    db.project.create({
     name: req.body.name,
     githubLink: req.body.githubLink,
     deployLink: req.body.deployedLink,
     description: req.body.description
   })
-  .then(([project, created])=>{
-    console.log('line 32', created);
+  .then((project)=>{
+    console.log('😀', project);
+    console.log(req.body.category)
     db.category.findOrCreate({
       where : {
-        category: req.body.category 
+        name: req.body.category 
       }
     })
-    .then(([category, created])=>{
+    .then((category)=>{
       project.addCategory(category)
-      console.log('line 39', created)
+      console.log('🥳', category)
       .then(newRelationship =>{
-        console.log('line 41', newRelationship)
+        console.log('🥺', newRelationship)
       })
       .catch(err =>{
-        console.log('line 26', err)
+        console.log('😅', err)
       })
     })
     .catch(err =>{
-      console.log('line 30', err)
+      console.log('😍', err)
     })
   })
   .catch(err =>{
-    console.log('line 34', err)
+    console.log('😎', err)
   })
     res.redirect('/')
   });
