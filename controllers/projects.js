@@ -44,6 +44,10 @@ router.post('/', (req, res) => {
      .then(([category, created]) => {
         console.log(created);
         project.addCategory(category)
+        .then(() => {
+          res.redirect('/')
+        })
+       
       })
       .catch(err => {
         console.log(err);
@@ -52,8 +56,6 @@ router.post('/', (req, res) => {
     .catch(err => {
       console.log('Error', err);
     });
-    
-    res.redirect('/')
 })
   
 // router.get('/new', (req, res) => {
