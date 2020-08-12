@@ -57,9 +57,49 @@ var async = require('async')
   // console.log('redirect or something')
 // })
 
-db.category.create({
-  name: 'node'
-}).then(([category, created])=>{
-  console.log(`This was created: ${created}`)
-  console.log(category.get())
+// db.category.create({
+//   name: 'node'
+// }).then(([category, created])=>{
+//   console.log(`This was created: ${created}`)
+//   console.log(category.get())
+// })
+
+// db.category.create({
+//   name: 'node'
+// }).then(function(category) {
+//   console.log(category.id)
+// })
+
+db.project.findOrCreate({
+  where: { name: 'Project Organizer' },
+  default: { 
+  githubLink: 'https://github.com/romebell/express_project_organizer',
+  deployLink: 'https://github.com/romebell/express_project_organizer',
+  description: 'This is a project where we use express to organize'
+}
+
+})
+.then(([project, created])=>{
+  console.log(created);
+
+  db.category.findOrCreate({
+    where: { name: 'node'}
+  })
+  .then(([category, created])=>{
+    console.log(created);
+    project.addCategory(category)
+    .then(newRelationship => {
+      console.log('New Relationship');
+      console.log(newRelationship);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
+.catch(err => {
+  console.log(err)
 })
