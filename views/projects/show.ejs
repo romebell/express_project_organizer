@@ -5,6 +5,12 @@
   <input type="hidden" name="id" value="<%= project.id %>" />
   <button type="submit">Remove from projects</button>
 </form>
+
+
+<form>
+<a href="/projects/<%= project.id %>">Edit</a>
+</form>
+
 <br>
 <a class="btn btn-primary" href="<%= project.githubLink %>" target="_blank">
   <i class="fa fa-github" aria-hidden="true"></i>
