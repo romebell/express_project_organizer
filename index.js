@@ -10,6 +10,7 @@ app.set('view engine', 'ejs')
 app.use(require('morgan')('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(ejsLayouts)
+// app.use('/catagories', require('./controllers/catagories'))
 
 app.get('/', (req, res) => {
   db.project.findAll()

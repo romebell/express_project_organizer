@@ -57,14 +57,83 @@ var async = require('async')
   // console.log('redirect or something')
 // })
 
-db.category.findOrCreate({
-  where: {name: 'node'}
+// db.category.findOrCreate({
+//   where: {name: 'node'}
+// })
+// //making an array and pass in the category and create it
+// .then(([category, created])=>{
+//   console.log(`This was created: ${created}`)
+//   console.log(category.get())
+// })
+// .catch(err =>{
+//   console.log('Error', err)
+// })
+
+// db.project.findOrCreate({
+//   where: {name: 'Project Organizer'},
+//   defaults: {githubLink: 'https://github.com/chamon562/express_project_organizer',
+//   deployLink: 'https://github.com/chamon562/express_project_organizer',
+//   description: 'This is a project wehre we use express to organize'
+//   }
+// })
+// .then(([project, created])=>{
+//   console.log(created)
+//   db.category.findOrCreate({
+//     where: {name: 'node'}
+//   })
+//   .then(([category, created]) =>{
+//     console.ong(created)
+//     //to add associate them together
+//     project.addCategory(category)
+//     .then(newRelation =>{
+//       console.log('new Relation')
+//       console.log(newRelation)
+//     })
+
+//     .catch(err=>{
+//       console.log(err)
+//     })
+    
+//   })
+//   .catch(err=>{
+//     console.log(err)
+//   })
+  
+  
+// })
+// .catch(err=>{
+//   console.log(err)
+// })
+
+
+db.project.findOrCreate({
+  where: { name: 'Main Project Organizer' },
+  defaults: { 
+    githubLink: 'https://github.com/romebell/express_project_organizer',
+    deployLink: 'https://github.com/romebell/express_project_organizer',
+    description: 'This is a project where Rome uses express to organize.'
+  }
 })
-//making an array and pass in the category and create it
-.then(([category, created])=>{
-  console.log(`This was created: ${created}`)
-  console.log(category.get())
+.then(([project, created]) => {
+   console.log('project created',created);
+   db.category.findOrCreate({
+     where: { name: 'node' }
+   })
+   .then(([category, created]) => {
+      console.log('category created',created);
+      project.addCategory(category)
+      .then(newRelationship => {
+        console.log('New Relationship');
+        console.log(newRelationship);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+   })
+   .catch(err => {
+     console.log(err);
+   })
 })
-.catch(err =>{
-  console.log('Error', err)
-})
+.catch(err => {
+  console.log('Error', err);
+});
