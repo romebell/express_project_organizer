@@ -24,15 +24,15 @@ router.post('/', async (req, res) => {
         console.log('line 41', newRelationship)
       })
       .catch(err =>{
-        console.log('line 44', err)
+        console.log('line 26', err)
       })
     })
     .catch(err =>{
-      console.log('line 48', err)
+      console.log('line 30', err)
     })
   })
   .catch(err =>{
-    console.log('line 52', err)
+    console.log('line 34', err)
   })
     res.redirect('/')
   });

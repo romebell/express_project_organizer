@@ -65,7 +65,7 @@ var async = require('async')
 // })
 
 // db.category.create({
-//   name: 'node'
+//   name: 'steven'
 // }).then(function(category) {
 //   console.log(category.id)
 // })
