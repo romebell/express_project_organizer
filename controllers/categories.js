@@ -27,3 +27,5 @@ router.get('/:id', (req, res) => {
         console.log('Error', error)
     })
 })
+
+module.exports = router;

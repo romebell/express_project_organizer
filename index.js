@@ -3,7 +3,6 @@ let ejsLayouts = require('express-ejs-layouts')
 let db = require('./models')
 let rowdy = require('rowdy-logger')
 let app = express()
-
 rowdy.begin(app)
 
 app.set('view engine', 'ejs')
@@ -34,3 +33,4 @@ let server = app.listen(process.env.PORT || 3000, function() {
 })
 
 module.exports = server
+

@@ -1,6 +1,6 @@
-let express = require('express')
-let db = require('../models')
-let router = express.Router()
+let express = require("express");
+let db = require("../models");
+let router = express.Router();
 
 // POST /projects - create a new project
 router.post('/', (req, res) => {
