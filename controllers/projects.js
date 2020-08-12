@@ -10,8 +10,19 @@ router.post('/', (req, res) => {
     deployLink: req.body.deployedLink,
     description: req.body.description
   })
-  .then((project) => {
-    res.redirect('/')
+  .then(project => {
+    db.category.findOrCreate({
+      where: { name: req.body.category}
+    })
+    .then(([category, created]) => {
+      console.log('New category:', created)
+      project.addCategory(category)
+      res.redirect('/')
+    })
+    .catch((error) => {
+      console.log('Error:', error)
+    })
+    
   })
   .catch((error) => {
     res.status(400).render('main/404')
