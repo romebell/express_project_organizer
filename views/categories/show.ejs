@@ -1,4 +1,7 @@
-<h1>Categories</h1>
+<h1>Categories <%= category.name %></h1>
 
+<% category.projects.forEach(p =>{ %>
+    <a href="/projects/<%= p.id %>"><%= p.name %></a>
+<% }) %>
 
   

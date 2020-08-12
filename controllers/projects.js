@@ -22,6 +22,7 @@ router.post('/', (req, res) => {
       project.addCategory(category)
       console.log('🥳', category)
       .then(newRelationship =>{
+        res.redirect('/')
         console.log('🥺', newRelationship)
       })
       .catch(err =>{
@@ -35,7 +36,6 @@ router.post('/', (req, res) => {
   .catch(err =>{
     console.log('😎', err)
   })
-    res.redirect('/')
   });
  
 
