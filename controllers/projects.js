@@ -22,12 +22,15 @@ router.post('/', (req, res) => {
       .then(newRelationship => {
         console.log('New Relationship');
         console.log(newRelationship);
+        res.redirect('/')
       })
       .catch(err => {
         console.log(err);
       })
     })
-    res.redirect('/')
+    .catch(err => {
+      console.log(err);
+    })
   })
   .catch((error) => {
     res.status(400).render('main/404')
