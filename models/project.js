@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const project = sequelize.define('project', {
     name: DataTypes.STRING,
+    // validates if string is url
     githubLink: {
       type: DataTypes.TEXT,
       validate: {
@@ -19,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
 
   project.associate = function(models) {
     // associations can be defined here
+    models.project.belongsToMany(models.category, 
+      { through: 'categories_projects', onDelete: 'CASCADE' })
   }
 
   return project
