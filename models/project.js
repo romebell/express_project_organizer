@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     githubLink: {
       type: DataTypes.TEXT,
       validate: {
+        //says if its a link then itll enter it in the data
         isUrl: true
       }
     },
@@ -19,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
 
   project.associate = function(models) {
     // associations can be defined here
+    models.project.belongsToMany(models.category, 
+      {through: 'categories_projects', onDelete: 'CASCADE'})
   }
 
   return project
