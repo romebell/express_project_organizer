@@ -1,5 +1,7 @@
 var db = require('./models')
 var async = require('async')
+
+/*
 // Create a category: Category model must exist and be migrated
 
 // db.category.create({
@@ -55,4 +57,49 @@ db.project.create({
   //   })
   // })
   // console.log('redirect or something')
+})
+
+*/
+
+// db.category.findOrCreate({
+//   where:{name: 'node'}
+// })
+// .then(([category, created]) => {
+//   console.log(`This was created: ${created}`);
+//   console.log(category.get());
+// })
+// .catch(err => {
+//   console.log(err);
+// })
+
+db.project.findOrCreate({
+  where: {name: 'Project Organizer'},
+  defaults: {
+    githubLink: 'https://github.com/margaret-jihua/express_project_organizer',
+    deployLink: 'https://github.com/margaret-jihua/express_project_organizer',
+    description: 'This is a project where we use express to organize.'
+  }
+})
+.then(([project, created])=>{
+  console.log(created);
+  db.category.findOrCreate({
+    where: { name: 'node'}
+  })
+  .then(([category, created]) => {
+    console.log(created);
+    project.addCategory(category)
+    .then(newRelationship => {
+      console.log('New Relationship');
+      console.log(newRelationship);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  })
+  .catch(err =>{
+    console.log(err);
+  })
+})
+.catch(err => {
+  console.log('Error', err);
 })
